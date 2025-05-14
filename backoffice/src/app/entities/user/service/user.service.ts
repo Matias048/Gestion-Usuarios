@@ -30,4 +30,8 @@ export class UserService {
   updateUser(id:number,user: User): Observable<User>{
     return this.http.put<User>(environment.apiUrls.editUser + id, user);
   }
+
+  deleteUser(id:number): Observable<User>{
+    return this.http.delete<User>(environment.apiUrls.deleteUser + id);
+  }
 }
