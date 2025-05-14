@@ -52,4 +52,9 @@ public class UserServiceImpl implements UserService {
         return userPersistence.getUserById(userId).map(userMapper::toDto);
     }
 
+    @Override
+    public void deleteUser(Long userId) {
+        userPersistence.deleteUser(userId);
+    }
+
 }

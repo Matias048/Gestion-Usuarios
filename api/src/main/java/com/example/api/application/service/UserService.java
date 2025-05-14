@@ -11,4 +11,5 @@ public interface UserService {
     Page<UserDto> getAllUsers(Pageable pageable);
     UserDto saveUser(UserDto userDto);
     Optional<UserDto> getUserById(Long userId);
+    void deleteUser(Long userId);
 }

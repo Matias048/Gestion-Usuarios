@@ -32,4 +32,9 @@ public class UserPersistenceImpl implements UserPersistence {
     public Optional<User> getUserById(Long userId) {
         return userRepository.findById(userId);
     }
+
+    @Override
+    public void deleteUser(Long userId) {
+        userRepository.deleteById(userId);
+    }
 }
