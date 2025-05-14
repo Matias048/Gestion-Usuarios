@@ -1,0 +1,148 @@
+<div class="container-fluid mt-4">
+  <div class="row justify-content-center">
+    <div class="col-sm-6 col-md-6 col-lg-5">
+      <h2>{{ edit ? "EDITANDO USUARIO" : "NUEVO USUARIO" }}</h2>
+
+      <form [formGroup]="formUser" (ngSubmit)="submit()">
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            formControlName="name"
+            class="form-control"
+            id="name"
+            placeholder="Nombre"
+          />
+          <label for="name">Nombre</label>
+          @if (formUser.get('name')?.invalid && formUser.get('name')?.touched) {
+          @if(formUser.get('name')?.errors?.['required']){
+          <div class="text-danger">El nombre es obligatorio</div>
+          } @if(formUser.get('name')?.errors?.['minlength']){
+          <div class="text-danger">
+            El nombre debe tener al menos 2 caracteres.
+          </div>
+          } @if(formUser.get('name')?.errors?.['maxlength']){
+          <div class="text-danger">
+            El nombre no puede tener más de 20 caracteres.
+          </div>
+          } }
+        </div>
+
+        <div class="form-floating mb-3">
+          <input
+            type="text"
+            formControlName="surname"
+            class="form-control"
+            id="surname"
+            placeholder="Apellidos"
+          />
+          <label for="surname">Apellidos</label>
+          @if (formUser.get('surname')?.invalid &&
+          formUser.get('surname')?.touched) {
+          @if(formUser.get('surname')?.errors?.['required']){
+          <div class="text-danger">El apellido es obligatorio</div>
+          } @if(formUser.get('surname')?.errors?.['minlength']){
+          <div class="text-danger">
+            El apellido debe tener al menos 2 caracteres.
+          </div>
+          } @if(formUser.get('surname')?.errors?.['maxlength']){
+          <div class="text-danger">
+            El apellido no puede tener más de 20 caracteres.
+          </div>
+          } }
+        </div>
+
+        <div class="form-floating mb-3">
+          <input
+            type="email"
+            formControlName="email"
+            class="form-control"
+            id="email"
+            placeholder="Email"
+          />
+          <label for="email">Email</label>
+          @if (formUser.get('email')?.invalid && formUser.get('email')?.touched)
+          { @if(formUser.get('email')?.errors?.['required']){
+          <div class="text-danger">El email es obligatorio</div>
+          } @if(formUser.get('email')?.errors?.['email']){
+          <div class="text-danger">Introduce un email Válido.</div>
+          } @if(formUser.get('email')?.errors?.['maxlength']){
+          <div class="text-danger">
+            El email no puede tener más de 50 caracteres.
+          </div>
+          } }
+        </div>
+
+        <div class="form-floating mb-3">
+          <select class="form-select" formControlName="roleId" id="rol">
+            <option value="" disabled selected>Seleccione un rol</option>
+            @for(role of roles; track role.id){
+            <option [value]="role.id">{{ role.name }}</option>
+            }
+          </select>
+          <label for="rol">Rol</label>
+          @if (formUser.get('rolId')?.invalid && formUser.get('rolId')?.touched)
+          {
+          <div class="text-danger">Debe seleccionar un Rol.</div>
+          }
+        </div>
+
+        <div class="d-flex justify-content-center gap-2">
+          <button
+            class="btn btn-danger"
+            type="button"
+            data-bs-toggle="modal"
+            data-bs-target="#cancelModal"
+          >
+            Cancelar
+          </button>
+          <button class="btn btn-success" [disabled]="formUser.invalid">
+            ENVIAR
+          </button>
+        </div>
+      </form>
+
+      <div
+        class="modal fade"
+        id="cancelModal"
+        tabindex="-1"
+        aria-labelledby="cancelModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="cancelModalLabel">¿Estas seguro?</h5>
+              <button
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Cerrar"
+              ></button>
+            </div>
+
+            <div class="modal-body">
+              Si cancelas se perderdan todos los cambios
+            </div>
+
+            <div class="modal-footer">
+              <button class="btn btn-secondary" data-bs-dismiss="modal">
+                No
+              </button>
+              <button class="btn btn-danger" (click)="confirmCancel()">
+                Sí, cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  @if(toastShow){
+  <ngb-toast
+    class="toast-container position-fixed top-0 end-0 p-3 {{ toast.color }}"
+    style="z-index: auto"
+  >
+    {{ toast.body }}
+  </ngb-toast>
+  }
+</div>
