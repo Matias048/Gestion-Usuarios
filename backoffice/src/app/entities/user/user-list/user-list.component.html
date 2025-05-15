@@ -3,30 +3,56 @@
     <h2 class="title">Usuarios</h2>
   </div>
 
-  <div
-    class="d-flex justify-content-between align-items-center my-3 flex-wrap gap-2"
-  >
-    <div class="dropdown">
-      <button
-        class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center"
-        type="button"
-        id="filterDropdown"
-        data-bs-toggle="dropdown"
-        aria-expanded="false"
-      >
-        <fa-icon [icon]="faFilter" class="me-2"></fa-icon>
-        Filtrar
-      </button>
-      <ul class="dropdown-menu" aria-labelledby="filterDropdown">
-        <li><a class="dropdown-item">Nombre</a></li>
-        <li><a class="dropdown-item">Apellidos</a></li>
-        <li><a class="dropdown-item">Rol</a></li>
-      </ul>
-    </div>
+  <div class="d-flex">
+    <div class="container-filter pt-2 pb-2">
+      <div class="d-flex justify-content-between pb-2">
+        <button
+          class="btn btn-outline-secondary d-flex align-items-center"
+          (click)="openFilters()"
+        >
+          <fa-icon [icon]="faFilter" class="me-2"></fa-icon>
+          Filtrar
+        </button>
 
-    <button class="btn btn-primary" routerLink="add">
-      Crear nuevo usuario
-    </button>
+        <button class="btn btn-primary" routerLink="add">
+          Crear nuevo usuario
+        </button>
+      </div>
+
+      @if(isFilterOpen){
+      <form [formGroup]="formFilters" (ngSubmit)="searchUser()">
+        <div class="row pt-2 pb-2 justify-content-around">
+          <div class="col-md-4">
+            <label for="name" class="form-label">Nombre</label>
+            <input type="text" id="name" class="form-control" formControlName="name"/>
+          </div>
+
+          <div class="col-md-4">
+            <label for="surname" class="form-label">Apellidos</label>
+            <input type="text" id="surname" class="form-control" formControlName="surname" />
+          </div>
+
+          <div class="col-md-4">
+            <label for="roleName" class="form-label">Rol</label>
+            <select class="form-select" id="roleName" formControlName="roleName">
+              <option value="" disabled selected>Seleccione un rol</option>
+              @for(role of roles; track role.id){
+              <option [value]="role.name">{{ role.name }}</option>
+              }
+            </select>
+          </div>
+        </div>
+        <div class="d-flex justify-content-around">
+          <button class="btn btn-danger" (click)="deleteFilters()">
+            Borrar Filtros
+          </button>
+          <button class="btn btn-dark" type="submit">
+            Buscar Usuario
+          </button>
+        </div>
+      </form>
+      }
+    </div>
   </div>
 
   <div class="container-form table-responsive">
@@ -69,9 +95,9 @@
     </table>
   </div>
 
-  <div class="col-md-12 my-2">
+  <div class="col-12 col-md my-2">
     <div class="row justify-content-center align-content-center">
-      <div class="col-md-3">
+      <div class="col-12 col-md-auto text-center">
         <ngb-pagination
           [collectionSize]="pageInfo?.totalElements || 0"
           [pageSize]="size"
@@ -104,19 +130,21 @@
             aria-label="Cerrar"
           ></button>
         </div>
-
         <div class="modal-body">¿Deseas Eliminar este Usuario?</div>
-
         <div class="modal-footer">
           <button class="btn btn-secondary" data-bs-dismiss="modal">No</button>
-          <button class="btn btn-danger" (click)="confirmCancel()" data-bs-dismiss="modal">
+          <button
+            class="btn btn-danger"
+            (click)="confirmDelete()"
+            data-bs-dismiss="modal"
+          >
             Sí
           </button>
         </div>
       </div>
     </div>
   </div>
-    @if(toastShow){
+  @if(toastShow){
   <ngb-toast
     class="toast-container position-fixed top-0 end-0 p-3 {{ toast.color }}"
     style="z-index: auto"

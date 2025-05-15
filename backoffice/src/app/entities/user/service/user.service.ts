@@ -12,10 +12,14 @@ export class UserService {
   private readonly http: HttpClient = inject(HttpClient);
   constructor() { }
 
-  getUsers(page: number, size: number): Observable<Userpaginated>{
-    const params = new HttpParams()
+  getUsers(page: number, size: number, filters?:string): Observable<Userpaginated>{
+    let params = new HttpParams()
     .set('page', (page - 1).toString())
     .set('size', size.toString())
+
+    if(filters !==undefined && filters !== null && filters.trim() !== ''){
+      params=params.set('filter', filters);
+    }
     return this.http.get<Userpaginated>( environment.apiUrls.getUsers, {params})
   }
 

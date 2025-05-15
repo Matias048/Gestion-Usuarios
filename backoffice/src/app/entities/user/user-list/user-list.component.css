@@ -8,6 +8,10 @@
 
 }
 
+.container-filter{
+    width: 100%;
+}
+
 .container-title{
     height: 3rem;
     padding: 0;
