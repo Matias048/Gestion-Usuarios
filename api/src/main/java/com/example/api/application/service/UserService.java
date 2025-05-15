@@ -12,4 +12,5 @@ public interface UserService {
     UserDto saveUser(UserDto userDto);
     Optional<UserDto> getUserById(Long userId);
     void deleteUser(Long userId);
+    Page<UserDto> getUsersByCriteriaStringPaged(String filter, Pageable pageable);
 }

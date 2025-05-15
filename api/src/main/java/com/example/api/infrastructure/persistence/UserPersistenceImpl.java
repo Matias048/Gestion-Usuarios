@@ -2,6 +2,8 @@ package com.example.api.infrastructure.persistence;
 
 import com.example.api.domain.entity.User;
 import com.example.api.domain.persistence.UserPersistence;
+import com.example.api.specs.UserSpecification;
+import com.example.api.specs.shared.SearchCriteriaHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -36,5 +38,11 @@ public class UserPersistenceImpl implements UserPersistence {
     @Override
     public void deleteUser(Long userId) {
         userRepository.deleteById(userId);
+    }
+
+    @Override
+    public Page<User> getAllUsersByFilter(Pageable pageable, String filter) {
+        UserSpecification specification = new UserSpecification(SearchCriteriaHelper.fromFilterString(filter));
+        return userRepository.findAll(specification, pageable);
     }
 }

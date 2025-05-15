@@ -21,12 +21,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    @CrossOrigin
-    @GetMapping(value = "/users", produces = "application/json")
-    public ResponseEntity<Page<UserDto>> CreateUser(Pageable pageable){
-        Page<UserDto> users = userService.getAllUsers(pageable);
-        return new ResponseEntity<Page<UserDto>>(users, HttpStatus.OK);
-    }
+//    @CrossOrigin
+//    @GetMapping(value = "/users", produces = "application/json")
+//    public ResponseEntity<Page<UserDto>> CreateUser(Pageable pageable){
+//        Page<UserDto> users = userService.getAllUsers(pageable);
+//        return new ResponseEntity<Page<UserDto>>(users, HttpStatus.OK);
+//    }
 
     @CrossOrigin
     @PostMapping(value = "/users", produces = "application/json")
@@ -57,6 +57,14 @@ public class UserController {
     public ResponseEntity<Void> deleteUser(@PathVariable Long userId){
         userService.deleteUser(userId);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "/users", produces = "application/json")
+    public ResponseEntity<Page<UserDto>> getUsersCriteriaPaged(
+        @RequestParam(value = "filter", required = false) String filter, Pageable pageable){
+        Page<UserDto> user = userService.getUsersByCriteriaStringPaged(filter, pageable);
+        return new ResponseEntity<Page<UserDto>>(user,HttpStatus.OK);
     }
 
 }

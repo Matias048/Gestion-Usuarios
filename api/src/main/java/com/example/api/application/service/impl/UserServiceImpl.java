@@ -57,4 +57,10 @@ public class UserServiceImpl implements UserService {
         userPersistence.deleteUser(userId);
     }
 
+    @Override
+    public Page<UserDto> getUsersByCriteriaStringPaged(String filter, Pageable pageable) {
+        Page<User> userPage = userPersistence.getAllUsersByFilter(pageable, filter);
+        return userPage.map(userMapper::toDto);
+    }
+
 }
