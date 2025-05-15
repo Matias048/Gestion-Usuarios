@@ -7,6 +7,7 @@ import {
   faPenToSquare,
   faTrash,
   faFilter,
+  faX
 } from '@fortawesome/free-solid-svg-icons';
 import { Userpaginated } from '../model/userpaginated';
 import { NgbPagination, NgbToast } from '@ng-bootstrap/ng-bootstrap';
@@ -38,6 +39,7 @@ export class UserListComponent implements OnInit {
   protected readonly faPenToSquare = faPenToSquare;
   protected readonly faTrash = faTrash;
   protected readonly faFilter = faFilter;
+  protected readonly faX = faX;
 
   users: User[] = [];
   pageInfo!: Userpaginated;

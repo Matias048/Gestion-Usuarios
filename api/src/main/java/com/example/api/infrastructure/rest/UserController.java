@@ -21,13 +21,6 @@ public class UserController {
         this.userService = userService;
     }
 
-//    @CrossOrigin
-//    @GetMapping(value = "/users", produces = "application/json")
-//    public ResponseEntity<Page<UserDto>> CreateUser(Pageable pageable){
-//        Page<UserDto> users = userService.getAllUsers(pageable);
-//        return new ResponseEntity<Page<UserDto>>(users, HttpStatus.OK);
-//    }
-
     @CrossOrigin
     @PostMapping(value = "/users", produces = "application/json")
     public ResponseEntity<UserDto> CreateUser(@RequestBody UserDto userDto){

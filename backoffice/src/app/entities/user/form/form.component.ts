@@ -99,8 +99,12 @@ export class FormComponent implements OnInit{
               this.showToast('Usuario Actualizado Correctamente', 'bg-success')
             },
             error: err=>{
-              const error= err.error?.message
-              this.showToast(error, 'bg-danger')
+              this.showToast('Ha ocurrido un error, Vuelve a intentarlo', 'bg-danger')
+              setTimeout(
+              ()=>{
+                this.router.navigateByUrl('/user')
+              }, 1500
+            )
             },
             complete: ()=>{
               setTimeout(
@@ -111,7 +115,7 @@ export class FormComponent implements OnInit{
             }
           }
         )
-      }
+    }
     }else{
       this.userService.addUser(this.formUser.getRawValue()).subscribe(
         {

@@ -15,7 +15,7 @@ export class AppComponent {
   screenWidth = signal<number>(window.innerWidth)
 
   @HostListener('window:resize')
-  onResizw(){ 
+  onResize(){ 
     this.screenWidth.set(window.innerHeight);
     if(this.screenWidth() < 768){
       this.isLeftSidebarCollapsed.set(true);

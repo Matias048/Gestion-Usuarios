@@ -6,6 +6,7 @@
   <div class="d-flex">
     <div class="container-filter pt-2 pb-2">
       <div class="d-flex justify-content-between pb-2">
+        @if(!isFilterOpen){
         <button
           class="btn btn-outline-secondary d-flex align-items-center"
           (click)="openFilters()"
@@ -13,8 +14,16 @@
           <fa-icon [icon]="faFilter" class="me-2"></fa-icon>
           Filtrar
         </button>
+        }@else{
+        <button class="btn btn-outline-danger d-flex align-items-center" (click)="openFilters()">
+          <fa-icon
+          [icon]="faX"
+          >
+          </fa-icon>
+        </button>
+        }
 
-        <button class="btn btn-primary" routerLink="add">
+        <button class="btn btn-dark" routerLink="add">
           Crear nuevo usuario
         </button>
       </div>
@@ -24,17 +33,31 @@
         <div class="row pt-2 pb-2 justify-content-around">
           <div class="col-md-4">
             <label for="name" class="form-label">Nombre</label>
-            <input type="text" id="name" class="form-control" formControlName="name"/>
+            <input
+              type="text"
+              id="name"
+              class="form-control"
+              formControlName="name"
+            />
           </div>
 
           <div class="col-md-4">
             <label for="surname" class="form-label">Apellidos</label>
-            <input type="text" id="surname" class="form-control" formControlName="surname" />
+            <input
+              type="text"
+              id="surname"
+              class="form-control"
+              formControlName="surname"
+            />
           </div>
 
           <div class="col-md-4">
             <label for="roleName" class="form-label">Rol</label>
-            <select class="form-select" id="roleName" formControlName="roleName">
+            <select
+              class="form-select"
+              id="roleName"
+              formControlName="roleName"
+            >
               <option value="" disabled selected>Seleccione un rol</option>
               @for(role of roles; track role.id){
               <option [value]="role.name">{{ role.name }}</option>
@@ -42,13 +65,11 @@
             </select>
           </div>
         </div>
-        <div class="d-flex justify-content-around">
+        <div class="d-flex justify-content-center gap-3">
           <button class="btn btn-danger" (click)="deleteFilters()">
             Borrar Filtros
           </button>
-          <button class="btn btn-dark" type="submit">
-            Buscar Usuario
-          </button>
+          <button class="btn btn-primary" type="submit">Buscar Usuario</button>
         </div>
       </form>
       }
@@ -99,7 +120,7 @@
     <div class="row justify-content-center align-content-center">
       <div class="col-12 col-md-auto text-center">
         <ngb-pagination
-          [collectionSize]="pageInfo?.totalElements || 0"
+          [collectionSize]="pageInfo ? pageInfo.totalElements : 0"
           [pageSize]="size"
           [(page)]="page"
           [maxSize]="3"
