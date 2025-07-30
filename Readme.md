@@ -8,7 +8,7 @@ Aplicación full stack desarrollada con Angular 17 (frontend) y Spring Boot (bac
 
 - **Frontend:** Angular 17, TypeScript, Bootstrap
 - **Backend:** Spring Boot, Java 17, JPA Criteria API
-- **Base de datos:** MySQL
+- **Base de datos:** H2 Database (en modo embebido para desarrollo y pruebas)
 - **Otros:** Gradle para gestión de dependencias y build
 
 ---
