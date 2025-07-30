@@ -37,20 +37,20 @@ Esto permite mantener la integridad de los datos y aporta **idempotencia** en op
 
 ## 🎥 Capturas de pantalla
 
-### 📋 Lista de usuarios
-![Lista de usuarios](assets/lista-usuarios.png)
+<h4>📋 Lista de usuarios</h4>
+<img src="assets/lista-usuarios.png" width="600"/>
 
-### ➕ Crear usuario
-![Crear usuario](assets/crear-usuario.png)
+<h4>➕ Crear usuario</h4>
+<img src="assets/crear-usuario.png" width="600"/>
 
-### ✏️ Editar usuario
-![Editar usuario](assets/editar-usuario.png)
+<h4>✏️ Editar usuario</h4>
+<img src="assets/editar-usuario.png" width="600"/>
 
-### 🗑️ Borrar usuario
-![Borrar usuario](assets/borrar-usuario.png)
+<h4>🗑️ Borrar usuario</h4>
+<img src="assets/borrar-usuario.png" width="600"/>
 
-### 🔍 Filtro por nombre
-![Filtro por nombre](assets/filtro-nombre.png)
+<h4>🔍 Filtro por nombre</h4>
+<img src="assets/filtro-nombre.png" width="600"/>
 
 ---
 
