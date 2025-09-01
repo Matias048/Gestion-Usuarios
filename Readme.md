@@ -76,7 +76,6 @@ ng serve
 
 
 
-Prueba
 
 
 
